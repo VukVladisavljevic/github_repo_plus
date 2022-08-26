@@ -1,9 +1,8 @@
 class StringKeys {
   StringKeys._();
 
-  static final HomeScreenKeys homeScreen = HomeScreenKeys();
-}
-
-class HomeScreenKeys {
-  final String ok = 'ok';
+  static final String title = 'title';
+  static final String noResults = 'noResults';
+  static final String searchFieldHint = 'searchFieldHint';
+  static final String somethingWentWrong = 'somethingWentWrong';
 }

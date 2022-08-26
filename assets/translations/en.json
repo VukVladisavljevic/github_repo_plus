@@ -1,6 +1,6 @@
 {
-    "cancel": "Cancel",
-    "ok": "OK",
-    "loading": "Loading",
-    "back": "Back"
+    "title": "Github Repo+",
+    "noResults": "No results",
+    "searchFieldHint": "Search by username",
+    "somethingWentWrong": "Something went wrong..."
 }

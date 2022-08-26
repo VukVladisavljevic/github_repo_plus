@@ -5,11 +5,11 @@ import '../../core/util/failure.dart';
 import 'package:http/http.dart';
 
 enum RequestType {
-  get,
-  post,
-  put,
-  patch,
-  delete,
+  Get,
+  Post,
+  Put,
+  Patch,
+  Delete,
 }
 
 abstract class BaseRemoteSource {
@@ -18,7 +18,9 @@ abstract class BaseRemoteSource {
 
   final _jsonDeserializationError = 'The provided string is not valid JSON';
 
-  final String coinsAPI = 'https://api.coingecko.com/api/v3/';
+  final String githubAPI = 'https://api.github.com';
+
+  final Map<String, String> basicAuth = {"Authorization": "token: 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"};
 
   final Client _client = getIt<Client>();
 
@@ -50,15 +52,15 @@ abstract class BaseRemoteSource {
   }) {
     final url = queryParams != null ? Uri.parse(endpoint).replace(queryParameters: queryParams) : Uri.parse(endpoint);
     switch (remoteCallType) {
-      case RequestType.get:
+      case RequestType.Get:
         return _client.get(url);
-      case RequestType.post:
+      case RequestType.Post:
         return _client.post(url, body: json.encode(requestBody));
-      case RequestType.put:
+      case RequestType.Put:
         return _client.put(url, body: json.encode(requestBody));
-      case RequestType.patch:
+      case RequestType.Patch:
         return _client.patch(url, body: json.encode(requestBody));
-      case RequestType.delete:
+      case RequestType.Delete:
         return _client.delete(url);
     }
   }

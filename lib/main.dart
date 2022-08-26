@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github_repo_plus/core/util/app_constants.dart';
 import 'package:github_repo_plus/presentation/screens/home/home_screen.dart';
-import 'package:github_repo_plus/presentation/shared/theme/app_themes.dart';
+
+import 'core/dependency_injector/data_injections.dart' as dataDi;
+import 'core/dependency_injector/domain_injections.dart' as domainDi;
+import 'core/dependency_injector/presentation_injections.dart' as presentationDi;
 
 final getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  dataDi.setupInjections();
+  domainDi.setupInjections();
+  presentationDi.setupInjections();
 
   runApp(
     EasyLocalization(
@@ -34,6 +41,5 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         home: HomeScreen(),
-        theme: AppThemes.darkTheme,
       );
 }

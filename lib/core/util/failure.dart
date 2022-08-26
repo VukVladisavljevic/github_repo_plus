@@ -5,7 +5,7 @@ class Failure extends Equatable {
   late final StackTrace? stackTrace;
 
   Failure(String? errorMessage, {StackTrace? errorTrace}) {
-    failureMessage = errorMessage ?? 'ADD LOCALIZED STRING';
+    failureMessage = errorMessage ?? 'n/a';
     stackTrace = errorTrace;
   }
 

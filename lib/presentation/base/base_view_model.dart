@@ -1,14 +1,14 @@
 import '../../core/util/failure.dart';
 import 'package:flutter/material.dart';
 
-enum ViewState { loading, idle }
+enum ViewState { Loading, Idle }
 
 class BaseViewModel extends ChangeNotifier {
-  ViewState _state = ViewState.loading;
+  ViewState _state = ViewState.Idle;
   Failure? error;
 
   ViewState get state => _state;
-  bool get isLoading => _state == ViewState.loading;
+  bool get isLoading => _state == ViewState.Loading;
 
   void setState(ViewState state) {
     _state = state;
