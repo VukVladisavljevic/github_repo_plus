@@ -21,5 +21,5 @@ class Icons {
 }
 
 class Misc {
-  final double cornerRadius = 30.0;
+  final double cornerRadius = 40.0;
 }

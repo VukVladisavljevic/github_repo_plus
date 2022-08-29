@@ -2,5 +2,7 @@
     "title": "Github Repo+",
     "noResults": "No results",
     "searchFieldHint": "Search by username",
-    "somethingWentWrong": "Something went wrong..."
+    "somethingWentWrong": "Something went wrong",
+    "requestLimitReached": "Request limit reached",
+    "numberOfPublicRepos": "Number of public repos"
 }

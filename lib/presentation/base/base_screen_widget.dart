@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_repo_plus/presentation/shared/theme/colors.dart';
 
 class BaseScreenParams {
   final String? title;
@@ -28,6 +29,7 @@ class BaseScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: _buildAppBar(context),
+        backgroundColor: ThemeColors.darkGrey,
         body: Padding(
           padding: EdgeInsets.only(top: params.topPadding ?? 0),
           child: screenContent,

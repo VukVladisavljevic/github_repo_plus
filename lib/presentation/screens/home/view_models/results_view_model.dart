@@ -7,9 +7,10 @@ import '../../../base/base_view_model.dart';
 class ResultsViewModel extends BaseViewModel {
   final SearchUsers searchUsers;
   final GetRepoCount getRepoCount;
+
+  Map<User, int> usersMap = {};
+
   bool get hasError => error != null;
-  List<User> users = [];
-  // Map<User, int> usersMap = {};
 
   ResultsViewModel(
     this.searchUsers,
@@ -17,8 +18,7 @@ class ResultsViewModel extends BaseViewModel {
   );
 
   Future<void> searchForUsers(String query) async {
-    if (query == '') {
-      clearResults();
+    if (query.isEmpty) {
       return;
     }
 
@@ -28,27 +28,34 @@ class ResultsViewModel extends BaseViewModel {
     var usersFound = await searchUsers(query);
 
     if (usersFound.isSuccess) {
-      users = usersFound.data!;
+      usersMap = await _updateUsers(usersFound.data);
+      setState(ViewState.Idle);
     } else {
       error = usersFound.error;
+      setState(ViewState.Failed);
     }
-    setState(ViewState.Idle);
   }
 
   void clearResults() {
-    users = [];
+    usersMap.clear();
     setState(ViewState.Idle);
   }
 
-  // void _updateUsers(List<User> users) async {
-  //   users.forEach((element) async {
-  //     var repos = await getRepoCount(element.reposUrl);
-  //     if (repos.isSuccess) {
-  //       usersMap[element] = repos.data ?? 0;
-  //     } else {
-  //       usersMap[element] = 0;
-  //     }
-  //   });
-  //   log(usersMap.toString());
-  // }
+  Future<Map<User, int>> _updateUsers(List<User>? users) async {
+    Map<User, int> newMap = {};
+    if (users == null || users.length == 0) {
+      return {};
+    }
+
+    for (var user in users) {
+      var reposCount = await getRepoCount(user.username);
+      if (reposCount.isSuccess) {
+        newMap[user] = reposCount.data ?? 0;
+      } else {
+        newMap[user] = -1;
+      }
+    }
+
+    return newMap;
+  }
 }

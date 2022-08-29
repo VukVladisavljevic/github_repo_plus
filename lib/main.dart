@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github_repo_plus/core/util/app_constants.dart';
-import 'package:github_repo_plus/presentation/screens/home/home_screen.dart';
+import 'package:github_repo_plus/presentation/screens/home/results_screen.dart';
 
 import 'core/dependency_injector/data_injections.dart' as dataDi;
 import 'core/dependency_injector/domain_injections.dart' as domainDi;
@@ -40,6 +40,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        home: HomeScreen(),
+        home: ResultsScreen(),
       );
 }

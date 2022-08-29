@@ -20,14 +20,12 @@ abstract class BaseRemoteSource {
 
   final String githubAPI = 'https://api.github.com';
 
-  final Map<String, String> basicAuth = {"Authorization": "token: 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"};
-
   final Client _client = getIt<Client>();
 
   Future<T> execute<T>(
     RequestType remoteCallType,
-    String endpoint,
-    Function jsonMapper, {
+    String endpoint, {
+    Function? jsonMapper,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? requestBody,
   }) async {
@@ -35,12 +33,16 @@ abstract class BaseRemoteSource {
         await _createApiRequest(remoteCallType, endpoint, queryParams: queryParams, requestBody: requestBody);
     if (successStatusCodes.contains(response.statusCode)) {
       try {
-        return jsonMapper(json.decode(utf8.decode(response.bodyBytes)));
+        if (jsonMapper != null) {
+          return jsonMapper(json.decode(utf8.decode(response.bodyBytes)));
+        } else {
+          return json.decode(utf8.decode(response.bodyBytes));
+        }
       } on FormatException catch (e, trace) {
         throw Failure(_jsonDeserializationError, errorTrace: trace);
       }
     } else {
-      throw response.statusCode == _notFountCode ? NotFoundFailure() : Failure(response.reasonPhrase);
+      throw response.statusCode == _notFountCode ? NotFoundFailure() : Failure(response.reasonPhrase!);
     }
   }
 

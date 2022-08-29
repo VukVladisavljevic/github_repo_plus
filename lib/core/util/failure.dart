@@ -4,8 +4,8 @@ class Failure extends Equatable {
   late final String failureMessage;
   late final StackTrace? stackTrace;
 
-  Failure(String? errorMessage, {StackTrace? errorTrace}) {
-    failureMessage = errorMessage ?? 'n/a';
+  Failure(String errorMessage, {StackTrace? errorTrace}) {
+    failureMessage = errorMessage;
     stackTrace = errorTrace;
   }
 
